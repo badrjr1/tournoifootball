@@ -184,7 +184,7 @@ class Categorie{
 class Ticket {
 private:
 	int id;
-	bool dispo; // 1 dispo, 0 reserve
+	bool dispo; // 1 disponible, 0 reserve
 	Categorie categorie ;//vip cat2 cta3 cta4
 public: 
 	static int idTick;
@@ -410,14 +410,13 @@ public:
 		tkt=*t.achterBillet();
 		this->ticket=1;
 		//cout<<"done 4"<<endl;
-	}
-    void verification(); //######################################
-	void afficherSpactateur(){
-		cout<<" ID: "<<id<<endl<<" Nom: "<<nom<<endl;
-		if(this->ticket==1)
-			tkt.afficheTicket();
-	}
-	int getid(){return id;}
+    }
+    void afficherSpactateur(){
+	cout<<" ID: "<<id<<endl<<" Nom: "<<nom<<endl;
+	    if(this->ticket==1)
+		    tkt.afficheTicket();
+    }
+    int getid(){return id;}
 };
 int Spectateur::idspct= 3000;
 class Resultat{
@@ -447,18 +446,6 @@ public:
 	int getNbB(){return nbB;}
 	int getDuree(){return duree;}
 };
-/*class Description {
-    private:
-        string Description;
-		string meteo;
-		string etat_terrain;
-    public:
-        void affciheDescription(){
-			cout<<"  Meteo :"<<meteo<<endl;
-			cout<<"  Etat du terrain : "<<etat_terrain<<endl;
-			cout<<"  Description : "<<Description<<endl;
-		}
-};*/
 class Match{
 private: 
 		int id ;
@@ -467,7 +454,6 @@ private:
 		Equipe equipe1;
 		Equipe equipe2;
 		Resultat resultat;
-        //Description desp;
 		string type ; // Elimination, Phase_de_group, Quart_de_final, Demi_final, Final
 public: 
 	static int idm ;
@@ -502,13 +488,12 @@ public:
 		//desp.affciheDescription();
 		cout<<"**************************************"<<endl;
 	}
-	void ModifierMatch	( Arbitre newArbitre, Terrain newTerrain, Equipe newEquipe1, Equipe newEquipe2, Resultat newResultat, string newType) { //, Description newDesp
+	void ModifierMatch	( Arbitre newArbitre, Terrain newTerrain, Equipe newEquipe1, Equipe newEquipe2, Resultat newResultat, string newType) { 
         arbitre = newArbitre;
         terrain = newTerrain;
         equipe1 = newEquipe1;
         equipe2 = newEquipe2;
         resultat = newResultat;
-        //desp = newDesp;
         type = newType;
 	};
 	string getTypeM(){ 
@@ -646,7 +631,6 @@ class Gestion_dequipe {
 		vector<Equipe> equipe;
 		Gestion_dequipe(){}
 		Gestion_dequipe(vector<Equipe> equipe):equipe(equipe){}
-/*        Equipe getEqp(int ideq);*/
         void ajouterEquipetrn(Equipe e){
 			if(existeTinvector(equipe,e)==-1)
 			equipe.push_back(e);
@@ -793,8 +777,8 @@ private:
 	Equipe vainqueur;
 	Gestion_dequipe GestEqp; 		//32 equipe
 	Gestion_darbitre GestArbt; 		//8 arbitre
-	Gestion_des_matchs GestMtch; 	//47 match qu total
-	Gestion_de_terrain GestTrn; 	//4 terrain
+	Gestion_des_matchs GestMtch; 		//47 match qu total
+	Gestion_de_terrain GestTrn; 		//4 terrain
 	Gestion_de_spectateur spect ;
 	Gestion_des_Group Gestgrp; 		//4 groupe apres l'elimination
 public:
@@ -1116,24 +1100,3 @@ bool trivect( Equipe_pnts& e1, Equipe_pnts& e2)
 {
 	return e1.getPnts()>e2.getPnts();
 }
- //1Tournoi, 2Match, 3Spectateur, 
- //4arbitre,5Terrain, 6equipe , 7Ticket
-
-/*vector<Group> creegroup(vector<Equipe> eqp , vector<int> indice) // 16 equipe
-{
-	vector<Group> cgp;
-	do{
-		Group gp;
-		do{
-			
-			int i=rand()%indice.size() +0;
-			Equipe_pnts ep(eqp[indice[i]]);
-			if(existeTinvector(gp.equipe,ep) == -1)
-			{
-				gp.ajouterEquipe(ep);
-				indice.erase(indice.begin()+i);
-			}
-		}while(gp.nombreEquipes()<4);
-		cgp.push_back(gp);
-	}while(cgp.size()<4);
-}*/
